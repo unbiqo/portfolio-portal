@@ -17,16 +17,15 @@ import {
 } from '@chakra-ui/react'
 import { HamburgerIcon } from '@chakra-ui/icons'
 import ThemeToggleButton from './theme-toggle-button'
-import { IoLogoGithub } from 'react-icons/io5'
 
-const LinkItem = ({ href, path, target, children, ...props }) => {
+const LinkItem = ({ href, path, target, scroll = false, children, ...props }) => {
   const active = path === href
   const inactiveColor = useColorModeValue('gray.800', 'whiteAlpha.900')
   return (
     <Link
       as={NextLink}
       href={href}
-      scroll={false}
+      scroll={scroll}
       p={2}
       bg={active ? 'grassTeal' : undefined}
       color={active ? '#202023' : inactiveColor}
@@ -44,6 +43,7 @@ const MenuLink = forwardRef((props, ref) => (
 
 const Navbar = props => {
   const { path } = props
+  const contactHref = '/#contact'
 
   return (
     <Box
@@ -55,89 +55,63 @@ const Navbar = props => {
       zIndex={2}
       {...props}
     >
-      <Container
-        display="flex"
-        p={2}
-        maxW="container.md"
-        wrap="wrap"
-        align="center"
-        justify="space-between"
-      >
-        <Flex align="center" mr={5}>
-          <Heading as="h1" size="lg" letterSpacing={'tighter'}>
-            <Logo />
-          </Heading>
-        </Flex>
-
-        <Stack
-          direction={{ base: 'column', md: 'row' }}
-          display={{ base: 'none', md: 'flex' }}
-          width={{ base: 'full', md: 'auto' }}
-          alignItems="center"
-          flexGrow={1}
-          mt={{ base: 4, md: 0 }}
+      <Container p={2} maxW="container.md">
+        <Flex
+          align="center"
+          justify={{ base: 'space-between', md: 'center' }}
+          flexWrap={{ base: 'wrap', md: 'nowrap' }}
+          gap={{ base: 0, md: 6 }}
         >
-          <LinkItem href="/works" path={path}>
-            Works
-          </LinkItem>
-          <LinkItem href="https://store.craftz.dog/" path={path}>
-            Wallpapers
-          </LinkItem>
-          <LinkItem href="/posts" path={path}>
-            Posts
-          </LinkItem>
-          <LinkItem href="https://uses.craftz.dog/">Uses</LinkItem>
-          <LinkItem
-            target="_blank"
-            href="https://github.com/craftzdog/craftzdog-homepage"
-            path={path}
-            display="inline-flex"
+          <Flex align="center">
+            <Heading as="h1" size="lg" letterSpacing={'tighter'}>
+              <Logo />
+            </Heading>
+          </Flex>
+
+          <Stack
+            direction={{ base: 'column', md: 'row' }}
+            display={{ base: 'none', md: 'flex' }}
+            width={{ base: 'full', md: 'auto' }}
             alignItems="center"
-            style={{ gap: 4 }}
-            pl={2}
+            mt={{ base: 4, md: 0 }}
           >
-            <IoLogoGithub />
-            Source
-          </LinkItem>
-        </Stack>
+            <LinkItem href="/" path={path}>
+              About
+            </LinkItem>
+            <LinkItem href="/works" path={path}>
+              Case Studies
+            </LinkItem>
+            <LinkItem href={contactHref} path={path} scroll>
+              Contact
+            </LinkItem>
+          </Stack>
 
-        <Box flex={1} align="right">
-          <ThemeToggleButton />
+          <Box display="flex" alignItems="center">
+            <ThemeToggleButton />
 
-          <Box ml={2} display={{ base: 'inline-block', md: 'none' }}>
-            <Menu isLazy id="navbar-menu">
-              <MenuButton
-                as={IconButton}
-                icon={<HamburgerIcon />}
-                variant="outline"
-                aria-label="Options"
-              />
-              <MenuList>
-                <MenuItem as={MenuLink} href="/">
-                  About
-                </MenuItem>
-                <MenuItem as={MenuLink} href="/works">
-                  Works
-                </MenuItem>
-                <MenuItem as={MenuLink} href="https://store.craftz.dog/">
-                  Wallpapers
-                </MenuItem>
-                <MenuItem as={MenuLink} href="/posts">
-                  Posts
-                </MenuItem>
-                <MenuItem as={MenuLink} href="https://uses.craftz.dog/">
-                  Uses
-                </MenuItem>
-                <MenuItem
-                  as={Link}
-                  href="https://github.com/craftzdog/craftzdog-homepage"
-                >
-                  View Source
-                </MenuItem>
-              </MenuList>
-            </Menu>
+            <Box ml={2} display={{ base: 'inline-block', md: 'none' }}>
+              <Menu isLazy id="navbar-menu">
+                <MenuButton
+                  as={IconButton}
+                  icon={<HamburgerIcon />}
+                  variant="outline"
+                  aria-label="Options"
+                />
+                <MenuList>
+                  <MenuItem as={MenuLink} href="/">
+                    About
+                  </MenuItem>
+                  <MenuItem as={MenuLink} href="/works">
+                    Case Studies
+                  </MenuItem>
+                  <MenuItem as={MenuLink} href={contactHref} scroll>
+                    Contact
+                  </MenuItem>
+                </MenuList>
+              </Menu>
+            </Box>
           </Box>
-        </Box>
+        </Flex>
       </Container>
     </Box>
   )

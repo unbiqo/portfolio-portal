@@ -5,7 +5,7 @@ import { ChevronRightIcon } from '@chakra-ui/icons'
 export const Title = ({ children }) => (
   <Box>
     <Link as={NextLink} href="/wallpapers">
-      Wallpapers
+      Resources
     </Link>
     <span>
       {' '}
@@ -38,22 +38,14 @@ export const LegalLinks = () => (
     fontSize={14}
     gap={4}
   >
-    <Link as={NextLink} href="https://store.craftz.dog/terms" target="_blank">
-      Terms of Use
+    <Link href="mailto:damir.sarsenov12@gmail.com">
+      damir.sarsenov12@gmail.com
     </Link>
     <Link
-      as={NextLink}
-      href="https://store.craftz.dog/privacy-policy"
+      href="https://www.linkedin.com/in/damir-sarsenov/"
       target="_blank"
     >
-      Privacy Policy
-    </Link>
-    <Link
-      as={NextLink}
-      href="https://store.craftz.dog/specified-commercial-transaction-act"
-      target="_blank"
-    >
-      Commerce disclosures
+      LinkedIn
     </Link>
   </Box>
 )

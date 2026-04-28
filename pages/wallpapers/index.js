@@ -1,5 +1,4 @@
-import NextLink from 'next/link'
-import { Box, Container, Heading, SimpleGrid, Link } from '@chakra-ui/react'
+import { Box, Container, Heading, SimpleGrid } from '@chakra-ui/react'
 import Layout from '../../components/layouts/article'
 import Section from '../../components/section'
 import { WorkGridItem } from '../../components/grid-item'
@@ -8,40 +7,36 @@ import thumbCherryBlossoms from '../../public/images/wallpapers/cherry-blossoms/
 import thumbMachiya from '../../public/images/wallpapers/machiya/ls-03.jpg'
 
 const Wallpapers = () => (
-  <Layout title="Wallpaper Packs">
+  <Layout title="Resources">
     <Container>
       <Heading as="h3" fontSize={20} mb={4}>
-        Wallpaper Packs
+        Resources
       </Heading>
 
       <Box my={4}>
-        The wallpaper packs offer a selection of carefully curated images
-        from&nbsp;
-        <Link as={NextLink} href="https://www.youtube.com/devaslife">
-          the devaslife YouTube channel
-        </Link>
-        , known for its programming content.
+        A small collection of playbooks and blueprints that outline how
+        automation and analytics initiatives are delivered end to end.
       </Box>
 
       <Section>
         <SimpleGrid columns={[1, 2, 2]} gap={6}>
           <WorkGridItem
             category="wallpapers"
-            id="machiya"
-            title="Machiya"
+            id="automation-playbooks"
+            title="Automation Playbooks"
             thumbnail={thumbMachiya}
           >
-            A traditional Japanese house, offering a tranquil backdrop that
-            contrasts with the technical subject matter
+            Frameworks for scoping, building, and maintaining automation-first
+            systems.
           </WorkGridItem>
           <WorkGridItem
             category="wallpapers"
-            id="cherry-blossoms"
-            title="Cherry Blossoms"
+            id="reporting-blueprints"
+            title="Reporting Blueprints"
             thumbnail={thumbCherryBlossoms}
           >
-            A serene riverside and cherry blossoms backdrop of the programming
-            tutorial
+            Dashboard design and reporting cadences optimized for business
+            impact.
           </WorkGridItem>
         </SimpleGrid>
       </Section>

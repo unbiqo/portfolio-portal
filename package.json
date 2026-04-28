@@ -1,7 +1,7 @@
 {
-  "name": "craftzdog-homepage",
+  "name": "damir-sarsenov-portfolio",
   "version": "1.0.0",
-  "description": "Takuya's website",
+  "description": "Damir Sarsenov portfolio website.",
   "scripts": {
     "dev": "next dev -H 0.0.0.0",
     "build": "next build",
@@ -10,7 +10,7 @@
     "lint": "next lint"
   },
   "keywords": [],
-  "author": "Takuya Matsuyama",
+  "author": "Damir Sarsenov",
   "license": "MIT",
   "dependencies": {
     "@chakra-ui/icons": "^2.1.1",
@@ -19,15 +19,16 @@
     "@emotion/styled": "^11.11.0",
     "@vercel/analytics": "^1.1.1",
     "framer-motion": "^10.16.4",
-    "next": "^13.5.6",
+    "next": "^16.1.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.11.0",
+    "sharp": "^0.34.5",
     "three": "^0.157.0"
   },
   "devDependencies": {
-    "eslint": "^8.52.0",
-    "eslint-config-next": "^13.5.6",
+    "eslint": "^9.39.2",
+    "eslint-config-next": "^16.1.6",
     "prettier": "^3.0.3"
   }
 }
