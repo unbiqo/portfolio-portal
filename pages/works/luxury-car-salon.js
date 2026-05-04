@@ -26,7 +26,7 @@ const copy = {
     title: 'Luxury Car Salon - премиальный автомобильный лендинг',
     displayTitle: 'Luxury Car Salon - премиальный автомобильный лендинг',
     description:
-      'Luxury Car Salon - high-end landing page для автомобильного дилера, созданный для премиальной клиентской презентации. Сайт использует quiet-luxury visual direction: full-screen video hero, утонченную типографику, animated vehicle inventory cards и простой contact flow для private inquiries.',
+      'Luxury Car Salon - high-end landing page для автомобильного дилера, созданный под премиальную клиентскую презентацию. Визуальная система держится на quiet-luxury направлении: full-screen video hero, утонченная типографика, animated vehicle inventory cards и простой contact flow для private inquiries.',
     roleLabel: 'Роль',
     role: 'Front-End Developer',
     focusLabel: 'Фокус',
@@ -35,7 +35,7 @@ const copy = {
     stack: 'Next.js, React, Tailwind CSS, Framer Motion, Vercel',
     impactLabel: 'Результат',
     impact:
-      'Создан polished customer-ready dealership website с optimized video delivery и production deployment',
+      'Создан customer-ready dealership website с optimized video delivery и production deployment',
     contactLabel: 'Контакт',
     linkLabel: 'Ссылка'
   }

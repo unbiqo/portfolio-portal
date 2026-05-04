@@ -21,10 +21,9 @@ const LogoBox = styled.span`
   }
 `
 
-const Logo = () => {
+const Logo = ({ href = '/' }) => {
   return (
-    (<Link href="/" scroll={false}>
-
+    <Link href={href} scroll={false}>
       <LogoBox>
         <FootprintIcon />
         <Text
@@ -36,9 +35,8 @@ const Logo = () => {
           Damir Sarsenov
         </Text>
       </LogoBox>
-
-    </Link>)
-  );
+    </Link>
+  )
 }
 
 export default Logo

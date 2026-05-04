@@ -2,10 +2,13 @@ import NextLink from 'next/link'
 import { Heading, Box, Image, Link, Badge } from '@chakra-ui/react'
 import { ChevronRightIcon } from '@chakra-ui/icons'
 
-export const Title = ({ children }) => (
+export const Title = ({ children, locale = 'en' }) => (
   <Box>
-    <Link as={NextLink} href="/wallpapers">
-      Resources
+    <Link
+      as={NextLink}
+      href={locale === 'ru' ? '/wallpapers/ru' : '/wallpapers'}
+    >
+      {locale === 'ru' ? 'Ресурсы' : 'Resources'}
     </Link>
     <span>
       {' '}
@@ -41,10 +44,7 @@ export const LegalLinks = () => (
     <Link href="mailto:damir.sarsenov12@gmail.com">
       damir.sarsenov12@gmail.com
     </Link>
-    <Link
-      href="https://www.linkedin.com/in/damir-sarsenov/"
-      target="_blank"
-    >
+    <Link href="https://www.linkedin.com/in/damir-sarsenov/" target="_blank">
       LinkedIn
     </Link>
   </Box>

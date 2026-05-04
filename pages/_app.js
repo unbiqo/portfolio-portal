@@ -4,12 +4,15 @@ import Fonts from '../components/fonts'
 import { AnimatePresence } from 'framer-motion'
 import Chakra from '../components/chakra'
 import { Analytics } from '@vercel/analytics/react'
+import { getLocaleFromPath } from '../lib/i18n'
 
 if (typeof window !== 'undefined') {
   window.history.scrollRestoration = 'manual'
 }
 
 function Website({ Component, pageProps, router }) {
+  const locale = getLocaleFromPath(router.asPath)
+
   useEffect(() => {
     const handleRouteChange = url => {
       const [, hash] = url.split('#')
@@ -27,6 +30,10 @@ function Website({ Component, pageProps, router }) {
       router.events.off('routeChangeComplete', handleRouteChange)
     }
   }, [router.events])
+
+  useEffect(() => {
+    document.documentElement.lang = locale
+  }, [locale])
 
   return (
     <Chakra cookies={pageProps.cookies}>

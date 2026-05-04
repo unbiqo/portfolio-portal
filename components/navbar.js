@@ -19,9 +19,18 @@ import {
 } from '@chakra-ui/react'
 import { HamburgerIcon } from '@chakra-ui/icons'
 import ThemeToggleButton from './theme-toggle-button'
+import LanguageToggleButton from './language-toggle-button'
 import ContactModal from './contact-modal'
+import { getLocaleFromPath, getRoute, navCopy } from '../lib/i18n'
 
-const LinkItem = ({ href, path, target, scroll = false, children, ...props }) => {
+const LinkItem = ({
+  href,
+  path,
+  target,
+  scroll = false,
+  children,
+  ...props
+}) => {
   const active = path === href
   const inactiveColor = useColorModeValue('gray.800', 'whiteAlpha.900')
   return (
@@ -47,6 +56,10 @@ const MenuLink = forwardRef((props, ref) => (
 const Navbar = props => {
   const { path } = props
   const { isOpen, onOpen, onClose } = useDisclosure()
+  const locale = getLocaleFromPath(path)
+  const copy = navCopy[locale]
+  const homeHref = getRoute('/', locale)
+  const worksHref = getRoute('/works', locale)
   const navColor = useColorModeValue('gray.800', 'whiteAlpha.900')
 
   return (
@@ -69,7 +82,7 @@ const Navbar = props => {
           >
             <Flex align="center">
               <Heading as="h1" size="lg" letterSpacing={'tighter'}>
-                <Logo />
+                <Logo href={homeHref} />
               </Heading>
             </Flex>
 
@@ -80,11 +93,11 @@ const Navbar = props => {
               alignItems="center"
               mt={{ base: 4, md: 0 }}
             >
-              <LinkItem href="/" path={path}>
-                About
+              <LinkItem href={homeHref} path={path}>
+                {copy.about}
               </LinkItem>
-              <LinkItem href="/works" path={path}>
-                Case Studies
+              <LinkItem href={worksHref} path={path}>
+                {copy.works}
               </LinkItem>
               <Button
                 variant="ghost"
@@ -94,12 +107,13 @@ const Navbar = props => {
                 color={navColor}
                 onClick={onOpen}
               >
-                Contact
+                {copy.contact}
               </Button>
             </Stack>
 
             <Box display="flex" alignItems="center">
               <ThemeToggleButton />
+              <LanguageToggleButton path={path} />
 
               <Box ml={2} display={{ base: 'inline-block', md: 'none' }}>
                 <Menu isLazy id="navbar-menu">
@@ -107,16 +121,16 @@ const Navbar = props => {
                     as={IconButton}
                     icon={<HamburgerIcon />}
                     variant="outline"
-                    aria-label="Options"
+                    aria-label={copy.menu}
                   />
                   <MenuList>
-                    <MenuItem as={MenuLink} href="/">
-                      About
+                    <MenuItem as={MenuLink} href={homeHref}>
+                      {copy.about}
                     </MenuItem>
-                    <MenuItem as={MenuLink} href="/works">
-                      Case Studies
+                    <MenuItem as={MenuLink} href={worksHref}>
+                      {copy.works}
                     </MenuItem>
-                    <MenuItem onClick={onOpen}>Contact</MenuItem>
+                    <MenuItem onClick={onOpen}>{copy.contact}</MenuItem>
                   </MenuList>
                 </Menu>
               </Box>
@@ -124,7 +138,7 @@ const Navbar = props => {
           </Flex>
         </Container>
       </Box>
-      <ContactModal isOpen={isOpen} onClose={onClose} />
+      <ContactModal isOpen={isOpen} onClose={onClose} locale={locale} />
     </>
   )
 }

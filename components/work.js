@@ -3,10 +3,10 @@ import NextLink from 'next/link'
 import { Heading, Box, Image, Link, Badge } from '@chakra-ui/react'
 import { ChevronRightIcon } from '@chakra-ui/icons'
 
-export const Title = ({ children }) => (
+export const Title = ({ children, locale = 'en' }) => (
   <Box>
-    <Link as={NextLink} href="/works">
-      Case Studies
+    <Link as={NextLink} href={locale === 'ru' ? '/works/ru' : '/works'}>
+      {locale === 'ru' ? 'Кейсы' : 'Case Studies'}
     </Link>
     <span>
       {' '}

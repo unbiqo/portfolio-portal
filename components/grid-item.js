@@ -26,36 +26,37 @@ export const WorkGridItem = ({
   children,
   category = 'works',
   id,
+  locale = 'en',
   title,
   thumbnail
-}) => (
-  <Box w="100%" textAlign="center">
-    <LinkBox
-      as={NextLink}
-      href={`/${category}/${id}`}
-      scroll={false}
-      cursor="pointer"
-    >
-      <Image
-        src={thumbnail}
-        alt={title}
-        className="grid-item-thumbnail"
-        placeholder="blur"
-      />
-      <LinkOverlay as="div" href={`/${category}/${id}`}>
-        <Text mt={2} fontSize={20}>
-          {title}
-        </Text>
-      </LinkOverlay>
-      <Text fontSize={14}>{children}</Text>
-    </LinkBox>
-  </Box>
-)
+}) => {
+  const href = `/${category}/${id}${locale === 'ru' ? '/ru' : ''}`
+
+  return (
+    <Box w="100%" textAlign="center">
+      <LinkBox as={NextLink} href={href} scroll={false} cursor="pointer">
+        <Image
+          src={thumbnail}
+          alt={title}
+          className="grid-item-thumbnail"
+          placeholder="blur"
+        />
+        <LinkOverlay as="div" href={href}>
+          <Text mt={2} fontSize={20}>
+            {title}
+          </Text>
+        </LinkOverlay>
+        <Text fontSize={14}>{children}</Text>
+      </LinkBox>
+    </Box>
+  )
+}
 
 export const WorkVideoGridItem = ({
   children,
   category = 'works',
   id,
+  locale = 'en',
   title,
   videoSrc,
   poster
@@ -63,6 +64,7 @@ export const WorkVideoGridItem = ({
   const videoRef = useRef(null)
   const [isHovering, setIsHovering] = useState(false)
   const posterSrc = typeof poster === 'string' ? poster : poster?.src
+  const href = `/${category}/${id}${locale === 'ru' ? '/ru' : ''}`
 
   const handleMouseEnter = () => {
     const video = videoRef.current
@@ -88,7 +90,7 @@ export const WorkVideoGridItem = ({
     <Box w="100%" textAlign="center">
       <LinkBox
         as={NextLink}
-        href={`/${category}/${id}`}
+        href={href}
         scroll={false}
         cursor="pointer"
         onMouseEnter={handleMouseEnter}
@@ -129,7 +131,7 @@ export const WorkVideoGridItem = ({
             transition="opacity 0.2s ease"
           />
         </Box>
-        <LinkOverlay as="div" href={`/${category}/${id}`}>
+        <LinkOverlay as="div" href={href}>
           <Text mt={2} fontSize={20}>
             {title}
           </Text>

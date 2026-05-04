@@ -32,19 +32,19 @@ const copy = {
     title: 'Кейсы',
     seedformTitle: 'Seedform - автоматизация influencer gifting',
     seedform:
-      'Автоматизирует gifting для Shopify-брендов: claim links, live status sync и ROI tracking, которые экономят часы каждый месяц.',
-    alenauTitle: 'Alenau - AI персональный стилист',
+      'Автоматизация gifting-процесса для Shopify-брендов: claim links, live status sync и ROI tracking без ручной рутины.',
+    alenauTitle: 'Alenau - AI-персональный стилист',
     alenau:
-      'Canvas-инструмент для стилизации с AI-рекомендациями по образам и roast-style критикой для финальной доработки.',
+      'Canvas-инструмент для сборки образов с AI-рекомендациями и roast-style разбором, чтобы довести look до финала.',
     biTitle: 'Оптимизация BI-отчетности',
-    bi: 'Tableau-дашборды и Python-автоматизация, которые сократили цикл отчетности на 40% и сэкономили 10+ часов в неделю.',
+    bi: 'Tableau-дашборды и Python-автоматизация, которые сократили цикл отчетности на 40% и экономят 10+ часов в неделю.',
     luxuryCarSalonTitle: 'Luxury Car Salon - премиальный автомобильный лендинг',
     luxuryCarSalon:
-      'Премиальный лендинг для автомобильного салона с full-screen video hero, утонченной типографикой, animated inventory cards и private inquiry flow.',
+      'Премиальный лендинг для автомобильного салона: full-screen video hero, строгая типографика, animated inventory cards и private inquiry flow.',
     marathonCourseTitle:
       'The Art of Storytelling Marathon - мультиязычный лендинг',
     marathonCourse:
-      'Билингвальный лендинг для творческой программы с organic illustrated path, EN/RU-контентом, language switching и формой записи.'
+      'Билингвальный лендинг для творческой программы с organic illustrated path, EN/RU-контентом, переключением языка и формой записи.'
   }
 }
 

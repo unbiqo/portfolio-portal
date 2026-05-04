@@ -18,7 +18,27 @@ import { FaTelegramPlane } from 'react-icons/fa'
 const email = 'damir.sarsenov12@gmail.com'
 const telegramHref = 'https://t.me/Jackiehan'
 
-const ContactModal = ({ isOpen, onClose }) => {
+const copy = {
+  en: {
+    title: 'Contact Damir',
+    description:
+      'Choose the channel that is easiest for you. Email opens your default mail app, so it works with Gmail, Yandex, Mail.ru, Outlook, Apple Mail, and other configured clients.',
+    email: 'Email me',
+    telegram: 'DM me on Telegram',
+    note: 'For the fastest response, include a short project summary, timeline, and preferred contact method.'
+  },
+  ru: {
+    title: 'Связаться с Дамиром',
+    description:
+      'Выберите удобный канал. Кнопка email откроет почтовое приложение по умолчанию: это может быть Gmail, Яндекс Почта, Mail.ru, Outlook, Apple Mail или другой настроенный клиент.',
+    email: 'Написать на email',
+    telegram: 'Написать в Telegram',
+    note: 'Чтобы я быстрее ответил, кратко опишите проект, сроки и удобный способ связи.'
+  }
+}
+
+const ContactModal = ({ isOpen, onClose, locale = 'en' }) => {
+  const t = copy[locale] || copy.en
   const panelBg = useColorModeValue('white', '#202023')
   const subtleBg = useColorModeValue('blackAlpha.50', 'whiteAlpha.100')
   const mutedColor = useColorModeValue('gray.600', 'whiteAlpha.700')
@@ -34,13 +54,11 @@ const ContactModal = ({ isOpen, onClose }) => {
         borderWidth="1px"
         borderColor={borderColor}
       >
-        <ModalHeader pb={2}>Contact Damir</ModalHeader>
+        <ModalHeader pb={2}>{t.title}</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
           <Text color={mutedColor} mb={4}>
-            Choose the channel that is easiest for you. Email opens your default
-            mail app, so it works with Gmail, Yandex, Mail.ru, Outlook, Apple
-            Mail, and other configured clients.
+            {t.description}
           </Text>
           <Stack spacing={3}>
             <Button
@@ -51,7 +69,7 @@ const ContactModal = ({ isOpen, onClose }) => {
               justifyContent="flex-start"
               _hover={{ textDecoration: 'none' }}
             >
-              Email me
+              {t.email}
             </Button>
             <Button
               as={Link}
@@ -65,7 +83,7 @@ const ContactModal = ({ isOpen, onClose }) => {
               justifyContent="flex-start"
               _hover={{ textDecoration: 'none' }}
             >
-              DM me on Telegram
+              {t.telegram}
             </Button>
           </Stack>
         </ModalBody>
@@ -76,8 +94,7 @@ const ContactModal = ({ isOpen, onClose }) => {
           px={6}
         >
           <Text color={mutedColor} fontSize="sm">
-            For the fastest response, include a short project summary, timeline,
-            and preferred contact method.
+            {t.note}
           </Text>
         </ModalFooter>
       </ModalContent>
