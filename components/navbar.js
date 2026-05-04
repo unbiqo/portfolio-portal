@@ -6,6 +6,7 @@ import {
   Box,
   Link,
   Stack,
+  Button,
   Heading,
   Flex,
   Menu,
@@ -13,10 +14,12 @@ import {
   MenuList,
   MenuButton,
   IconButton,
+  useDisclosure,
   useColorModeValue
 } from '@chakra-ui/react'
 import { HamburgerIcon } from '@chakra-ui/icons'
 import ThemeToggleButton from './theme-toggle-button'
+import ContactModal from './contact-modal'
 
 const LinkItem = ({ href, path, target, scroll = false, children, ...props }) => {
   const active = path === href
@@ -43,77 +46,86 @@ const MenuLink = forwardRef((props, ref) => (
 
 const Navbar = props => {
   const { path } = props
-  const contactHref = '/#contact'
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  const navColor = useColorModeValue('gray.800', 'whiteAlpha.900')
 
   return (
-    <Box
-      position="fixed"
-      as="nav"
-      w="100%"
-      bg={useColorModeValue('#ffffff40', '#20202380')}
-      css={{ backdropFilter: 'blur(10px)' }}
-      zIndex={2}
-      {...props}
-    >
-      <Container p={2} maxW="container.md">
-        <Flex
-          align="center"
-          justify={{ base: 'space-between', md: 'center' }}
-          flexWrap={{ base: 'wrap', md: 'nowrap' }}
-          gap={{ base: 0, md: 6 }}
-        >
-          <Flex align="center">
-            <Heading as="h1" size="lg" letterSpacing={'tighter'}>
-              <Logo />
-            </Heading>
-          </Flex>
-
-          <Stack
-            direction={{ base: 'column', md: 'row' }}
-            display={{ base: 'none', md: 'flex' }}
-            width={{ base: 'full', md: 'auto' }}
-            alignItems="center"
-            mt={{ base: 4, md: 0 }}
+    <>
+      <Box
+        position="fixed"
+        as="nav"
+        w="100%"
+        bg={useColorModeValue('#ffffff40', '#20202380')}
+        css={{ backdropFilter: 'blur(10px)' }}
+        zIndex={2}
+        {...props}
+      >
+        <Container p={2} maxW="container.md">
+          <Flex
+            align="center"
+            justify={{ base: 'space-between', md: 'center' }}
+            flexWrap={{ base: 'wrap', md: 'nowrap' }}
+            gap={{ base: 0, md: 6 }}
           >
-            <LinkItem href="/" path={path}>
-              About
-            </LinkItem>
-            <LinkItem href="/works" path={path}>
-              Case Studies
-            </LinkItem>
-            <LinkItem href={contactHref} path={path} scroll>
-              Contact
-            </LinkItem>
-          </Stack>
+            <Flex align="center">
+              <Heading as="h1" size="lg" letterSpacing={'tighter'}>
+                <Logo />
+              </Heading>
+            </Flex>
 
-          <Box display="flex" alignItems="center">
-            <ThemeToggleButton />
+            <Stack
+              direction={{ base: 'column', md: 'row' }}
+              display={{ base: 'none', md: 'flex' }}
+              width={{ base: 'full', md: 'auto' }}
+              alignItems="center"
+              mt={{ base: 4, md: 0 }}
+            >
+              <LinkItem href="/" path={path}>
+                About
+              </LinkItem>
+              <LinkItem href="/works" path={path}>
+                Case Studies
+              </LinkItem>
+              <Button
+                variant="ghost"
+                p={2}
+                h="auto"
+                fontWeight="normal"
+                color={navColor}
+                onClick={onOpen}
+              >
+                Contact
+              </Button>
+            </Stack>
 
-            <Box ml={2} display={{ base: 'inline-block', md: 'none' }}>
-              <Menu isLazy id="navbar-menu">
-                <MenuButton
-                  as={IconButton}
-                  icon={<HamburgerIcon />}
-                  variant="outline"
-                  aria-label="Options"
-                />
-                <MenuList>
-                  <MenuItem as={MenuLink} href="/">
-                    About
-                  </MenuItem>
-                  <MenuItem as={MenuLink} href="/works">
-                    Case Studies
-                  </MenuItem>
-                  <MenuItem as={MenuLink} href={contactHref} scroll>
-                    Contact
-                  </MenuItem>
-                </MenuList>
-              </Menu>
+            <Box display="flex" alignItems="center">
+              <ThemeToggleButton />
+
+              <Box ml={2} display={{ base: 'inline-block', md: 'none' }}>
+                <Menu isLazy id="navbar-menu">
+                  <MenuButton
+                    as={IconButton}
+                    icon={<HamburgerIcon />}
+                    variant="outline"
+                    aria-label="Options"
+                  />
+                  <MenuList>
+                    <MenuItem as={MenuLink} href="/">
+                      About
+                    </MenuItem>
+                    <MenuItem as={MenuLink} href="/works">
+                      Case Studies
+                    </MenuItem>
+                    <MenuItem onClick={onOpen}>Contact</MenuItem>
+                  </MenuList>
+                </Menu>
+              </Box>
             </Box>
-          </Box>
-        </Flex>
-      </Container>
-    </Box>
+          </Flex>
+        </Container>
+      </Box>
+      <ContactModal isOpen={isOpen} onClose={onClose} />
+    </>
   )
 }
 
