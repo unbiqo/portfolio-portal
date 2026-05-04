@@ -7,6 +7,7 @@ import thumbAutomation from '../public/images/works/inkdrop_eyecatch.png'
 import thumbScraping from '../public/images/works/alenau_eyecatch.png'
 import thumbAnalytics from '../public/images/works/the-four-painters_eyecatch.jpg'
 import thumbLuxuryCarSalon from '../public/images/works/luxury-car-salon_01.png'
+import thumbMarathonCourse from '../public/images/works/marathon-course_01.png'
 
 const copy = {
   en: {
@@ -21,7 +22,11 @@ const copy = {
     bi: 'Tableau dashboards and Python automation that cut reporting cycles by 40% and saved 10+ hours weekly.',
     luxuryCarSalonTitle: 'Luxury Car Salon - Premium Automotive Landing Page',
     luxuryCarSalon:
-      'High-end automotive dealer landing page with a full-screen video hero, refined typography, animated inventory cards, and private inquiry flow.'
+      'High-end automotive dealer landing page with a full-screen video hero, refined typography, animated inventory cards, and private inquiry flow.',
+    marathonCourseTitle:
+      'The Art of Storytelling Marathon - Multilingual Landing Page',
+    marathonCourse:
+      'Bilingual creative program landing page with an organic illustrated path, localized EN/RU content, language switching, and signup capture flow.'
   },
   ru: {
     title: 'Кейсы',
@@ -35,7 +40,11 @@ const copy = {
     bi: 'Tableau-дашборды и Python-автоматизация, которые сократили цикл отчетности на 40% и сэкономили 10+ часов в неделю.',
     luxuryCarSalonTitle: 'Luxury Car Salon - премиальный автомобильный лендинг',
     luxuryCarSalon:
-      'Премиальный лендинг для автомобильного салона с full-screen video hero, утонченной типографикой, animated inventory cards и private inquiry flow.'
+      'Премиальный лендинг для автомобильного салона с full-screen video hero, утонченной типографикой, animated inventory cards и private inquiry flow.',
+    marathonCourseTitle:
+      'The Art of Storytelling Marathon - мультиязычный лендинг',
+    marathonCourse:
+      'Билингвальный лендинг для творческой программы с organic illustrated path, EN/RU-контентом, language switching и формой записи.'
   }
 }
 
@@ -89,6 +98,16 @@ export const WorksPage = ({ locale = 'en' }) => {
               thumbnail={thumbLuxuryCarSalon}
             >
               {t.luxuryCarSalon}
+            </WorkGridItem>
+          </Section>
+          <Section delay={0.2}>
+            <WorkGridItem
+              id="marathon-course"
+              locale={locale}
+              title={t.marathonCourseTitle}
+              thumbnail={thumbMarathonCourse}
+            >
+              {t.marathonCourse}
             </WorkGridItem>
           </Section>
         </SimpleGrid>
