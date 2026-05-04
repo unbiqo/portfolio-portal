@@ -1,4 +1,3 @@
-import NextLink from 'next/link'
 import { Button, useColorModeValue } from '@chakra-ui/react'
 import {
   getLanguageSwitchHref,
@@ -12,12 +11,19 @@ const LanguageToggleButton = ({ path }) => {
   const locale = getLocaleFromPath(path)
   const copy = navCopy[locale]
   const nextLocale = getLanguageSwitchLocale(path)
+  const href = getLanguageSwitchHref(path)
+
+  const handleClick = event => {
+    event.preventDefault()
+    setPreferredLocale(nextLocale)
+    window.location.assign(href)
+  }
 
   return (
     <Button
-      as={NextLink}
-      href={getLanguageSwitchHref(path)}
-      onClick={() => setPreferredLocale(nextLocale)}
+      as="a"
+      href={href}
+      onClick={handleClick}
       aria-label={copy.switchLanguage}
       title={copy.switchLanguage}
       colorScheme={useColorModeValue('teal', 'cyan')}
