@@ -2,10 +2,7 @@ import { useState, useEffect, useRef, useCallback } from 'react'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { loadGLTFModel } from '../lib/model'
-import {
-  TerrariumSpinner,
-  TerrariumContainer
-} from './voxel-terrarium-loader'
+import { TerrariumSpinner, TerrariumContainer } from './voxel-terrarium-loader'
 
 function easeOutCirc(x) {
   return Math.sqrt(1 - Math.pow(x - 1, 4))
@@ -77,7 +74,7 @@ const VoxelTerrarium = () => {
       controls.target = target
 
       const MIN_ZOOM = 0.9
-      const MAX_ZOOM = 4.0
+      const MAX_ZOOM = 3.0
       const ZOOM_STEP = 1.06
       const DOUBLE_TAP_ZOOM = 1.125
       const DOUBLE_TAP_DELAY = 280
@@ -246,29 +243,6 @@ const VoxelTerrarium = () => {
         renderer.domElement.remove()
         renderer.dispose()
       }
-    }
-  }, [])
-
-  useEffect(() => {
-    const updateOverlap = () => {
-      const { current: container } = refContainer
-      if (!container) return
-      const banner = document.getElementById('intro-banner')
-      if (!banner) {
-        container.style.removeProperty('--terrarium-overlap')
-        return
-      }
-      const height = banner.getBoundingClientRect().height
-      container.style.setProperty(
-        '--terrarium-overlap',
-        `${Math.round(height)}px`
-      )
-    }
-
-    updateOverlap()
-    window.addEventListener('resize', updateOverlap)
-    return () => {
-      window.removeEventListener('resize', updateOverlap)
     }
   }, [])
 

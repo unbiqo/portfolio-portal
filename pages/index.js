@@ -7,6 +7,7 @@ import {
   Button,
   List,
   ListItem,
+  SimpleGrid,
   useColorModeValue
 } from '@chakra-ui/react'
 import { ChevronRightIcon, EmailIcon } from '@chakra-ui/icons'
@@ -14,7 +15,12 @@ import Paragraph from '../components/paragraph'
 import { BioSection, BioYear } from '../components/bio'
 import Layout from '../components/layouts/article'
 import Section from '../components/section'
+import { WorkGridItem, WorkVideoGridItem } from '../components/grid-item'
 import { IoLogoLinkedin } from 'react-icons/io5'
+import thumbAutomation from '../public/images/works/inkdrop_eyecatch.png'
+import thumbScraping from '../public/images/works/alenau_eyecatch.png'
+import thumbAnalytics from '../public/images/works/the-four-painters_eyecatch.jpg'
+import thumbLuxuryCarSalon from '../public/images/works/luxury-car-salon_01.png'
 
 const copy = {
   en: {
@@ -24,7 +30,34 @@ const copy = {
     profileTitle: 'Profile',
     profile:
       'Architect of end-to-end digital solutions, from responsive React frontends to automated Python-driven data pipelines. Known for bridging the gap between raw data engineering and business intelligence, translating complex operational needs into clear, measurable outcomes.',
-    viewWorks: 'View case studies',
+    projectsTitle: 'Projects',
+    viewAllWorks: 'View all projects',
+    featuredWorks: [
+      {
+        id: 'seedform',
+        title: 'Seedform - Influencer Gifting Automation',
+        description:
+          'Influencer gifting automation for Shopify brands with claim links, live status sync, and ROI tracking.'
+      },
+      {
+        id: 'web-scraping',
+        title: 'Alenau - AI Personal Stylist',
+        description:
+          'Canvas-based styling tool with AI outfit recommendations and roast-style critique.'
+      },
+      {
+        id: 'bi-automation',
+        title: 'BI Reporting Optimization',
+        description:
+          'Tableau dashboards and Python automation that reduced reporting cycles by 40%.'
+      },
+      {
+        id: 'luxury-car-salon',
+        title: 'Luxury Car Salon',
+        description:
+          'Premium automotive landing page with a video hero, animated inventory, and private inquiry flow.'
+      }
+    ],
     experienceTitle: 'Experience',
     selfEmployed:
       'Full-Stack Software Engineer (Self-Employed). Delivering custom SaaS platforms, automated web scraping with Selenium/BeautifulSoup, and AI-driven workflows using n8n/Zapier.',
@@ -76,23 +109,17 @@ const copy = {
 export const HomePage = ({ locale = 'en' }) => {
   const t = copy[locale]
   const worksHref = locale === 'ru' ? '/works/ru' : '/works'
+  const featuredWorks = t.featuredWorks || copy.en.featuredWorks
+  const featuredThumbnails = {
+    seedform: thumbAutomation,
+    'web-scraping': thumbScraping,
+    'bi-automation': thumbAnalytics,
+    'luxury-car-salon': thumbLuxuryCarSalon
+  }
 
   return (
     <Layout>
       <Container>
-        <Box
-          as="header"
-          id="intro-banner"
-          borderRadius="lg"
-          mb={6}
-          p={3}
-          textAlign="center"
-          bg={useColorModeValue('whiteAlpha.500', 'whiteAlpha.200')}
-          css={{ backdropFilter: 'blur(10px)' }}
-        >
-          {t.intro}
-        </Box>
-
         <Box display={{ md: 'flex' }}>
           <Box flexGrow={1}>
             <Heading as="h2" variant="page-title">
@@ -133,7 +160,38 @@ export const HomePage = ({ locale = 'en' }) => {
             </Heading>
             <Paragraph>{t.profile}</Paragraph>
           </Box>
-          <Box align="center" my={4}>
+          <Box as="section" id="projects" mt={8}>
+            <Heading as="h3" variant="section-title">
+              {t.projectsTitle || copy.en.projectsTitle}
+            </Heading>
+            <SimpleGrid columns={[1, 1, 2]} gap={6}>
+              {featuredWorks.map(work =>
+                work.id === 'seedform' ? (
+                  <WorkVideoGridItem
+                    key={work.id}
+                    id={work.id}
+                    locale={locale}
+                    title={work.title}
+                    videoSrc="/videos/Demo_Seedform.mp4"
+                    poster={featuredThumbnails[work.id]}
+                  >
+                    {work.description}
+                  </WorkVideoGridItem>
+                ) : (
+                  <WorkGridItem
+                    key={work.id}
+                    id={work.id}
+                    locale={locale}
+                    title={work.title}
+                    thumbnail={featuredThumbnails[work.id]}
+                  >
+                    {work.description}
+                  </WorkGridItem>
+                )
+              )}
+            </SimpleGrid>
+          </Box>
+          <Box align="center" mt={6}>
             <Button
               as={NextLink}
               href={worksHref}
@@ -141,7 +199,7 @@ export const HomePage = ({ locale = 'en' }) => {
               rightIcon={<ChevronRightIcon />}
               colorScheme="teal"
             >
-              {t.viewWorks}
+              {t.viewAllWorks || copy.en.viewAllWorks}
             </Button>
           </Box>
         </Section>

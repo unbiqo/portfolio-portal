@@ -25,23 +25,14 @@ const Main = ({ children, router }) => {
     <Box as="main" pb={8}>
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta
-          name="description"
-          content={description}
-        />
+        <meta name="description" content={description} />
         <meta name="author" content="Damir Sarsenov" />
         <link rel="apple-touch-icon" href="apple-touch-icon.png" />
         <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-        <meta
-          name="twitter:title"
-          content={title}
-        />
+        <meta name="twitter:title" content={title} />
         <meta name="twitter:card" content="summary_large_image" />
         <meta property="og:site_name" content="Damir Sarsenov" />
-        <meta
-          name="og:title"
-          content={title}
-        />
+        <meta name="og:title" content={title} />
         <meta property="og:type" content="website" />
         <title>{title}</title>
       </Head>
@@ -49,9 +40,9 @@ const Main = ({ children, router }) => {
       <NavBar path={router.asPath} />
 
       <Container maxW="container.md" pt={14}>
-        <LazyVoxelTerrarium />
-
         {children}
+
+        <LazyVoxelTerrarium />
 
         <Footer />
       </Container>

@@ -17,14 +17,10 @@ export const TerrariumContainer = forwardRef(({ children }, ref) => (
     ref={ref}
     className="voxel-terrarium"
     m="auto"
-    mt={['-20px', '-60px', '-120px']}
-    mb={[
-      'calc(-1 * var(--terrarium-overlap, 40px))',
-      'calc(-1 * var(--terrarium-overlap, 140px))',
-      'calc(-1 * var(--terrarium-overlap, 200px))'
-    ]}
-    w={[280, 480, 640]}
-    h={[280, 480, 640]}
+    mt={8}
+    mb={4}
+    w={[140, 240, 320]}
+    h={[140, 240, 320]}
     position="relative"
   >
     {children}
