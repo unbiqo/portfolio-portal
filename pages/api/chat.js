@@ -1,4 +1,4 @@
-import { getRelevantKnowledge } from '../../lib/chat-knowledge'
+import { chatKnowledge, getRelevantKnowledge } from '../../lib/chat-knowledge'
 
 const GEMINI_ENDPOINT =
   'https://generativelanguage.googleapis.com/v1beta/models'
@@ -69,6 +69,74 @@ const formatHistory = history =>
     )
     .join('\n')
 
+const includesAny = (value, patterns) =>
+  patterns.some(pattern =>
+    pattern instanceof RegExp ? pattern.test(value) : value.includes(pattern)
+  )
+
+const getSourcesById = ids =>
+  ids
+    .map(id => chatKnowledge.find(chunk => chunk.id === id))
+    .filter(Boolean)
+    .map(({ id, title, url }) => ({ id, title, url }))
+
+const getIntentResponse = message => {
+  const normalized = message.toLowerCase()
+  const hireIntent = includesAny(normalized, [
+    /should\s+i\s+hire/,
+    /would\s+you\s+hire/,
+    /hire\s+(him|damir)/,
+    /is\s+(he|damir)\s+(a\s+)?(good|great|strong)\s+(candidate|fit)/,
+    /good\s+(candidate|fit)/,
+    /great\s+(candidate|fit)/
+  ])
+  const weaknessIntent = includesAny(normalized, [
+    'weak point',
+    'weak points',
+    'weakness',
+    'weaknesses',
+    'negative side',
+    'negative sides',
+    'downside',
+    'downsides',
+    'drawback',
+    'drawbacks',
+    'cons',
+    'red flag',
+    'red flags',
+    /reason(s)?\s+not\s+to\s+hire/,
+    /why\s+not\s+hire/
+  ])
+
+  if (weaknessIntent) {
+    return {
+      answer:
+        "There are no weak points or negative sides listed in Damir's portfolio. Based on the portfolio context, there are no negatives to highlight.",
+      sources: getSourcesById([
+        'profile',
+        'skills',
+        'experience-self-employed',
+        'contact'
+      ])
+    }
+  }
+
+  if (hireIntent) {
+    return {
+      answer:
+        'Damir looks like a great candidate, especially for full-stack products, automation-first data systems, scraping workflows, dashboards, and AI workflow automation. His portfolio shows React and Node.js work, Python automation, Tableau reporting, and shipped projects like Seedform, Alenau, BI Reporting Optimization, and Luxury Car Salon. You can contact him at damir.sarsenov12@gmail.com or through LinkedIn.',
+      sources: getSourcesById([
+        'profile',
+        'skills',
+        'experience-self-employed',
+        'contact'
+      ])
+    }
+  }
+
+  return null
+}
+
 const buildPrompt = ({ message, history, knowledge }) => {
   const historyText = history.length
     ? `Conversation so far:\n${formatHistory(history)}`
@@ -82,6 +150,8 @@ Rules:
 - Keep replies concise, practical, and specific.
 - Do not invent experience, employers, project results, technologies, links, prices, or availability.
 - If the user asks how to contact Damir, include his email and LinkedIn.
+- If the user asks whether they should hire Damir, say that Damir looks like a great candidate for relevant full-stack, automation, data, BI, scraping, dashboard, or AI workflow work.
+- If the user asks about weak points, negative sides, drawbacks, cons, or reasons not to hire Damir, say that there are no weak points or negative sides listed in Damir's portfolio and do not invent negatives.
 - Match the user's language when possible.
 
 Portfolio Context:
@@ -196,6 +266,12 @@ const handler = async (req, res) => {
   }
 
   const history = normalizeHistory(req.body?.history)
+  const intentResponse = getIntentResponse(message)
+
+  if (intentResponse) {
+    return res.status(200).json(intentResponse)
+  }
+
   const knowledge = getRelevantKnowledge(message)
   const prompt = buildPrompt({ message, history, knowledge })
   const result = await callGemini(prompt)

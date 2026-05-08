@@ -14,6 +14,7 @@ import {
   useColorModeValue
 } from '@chakra-ui/react'
 import { IoChatbubbleEllipses, IoClose, IoSend } from 'react-icons/io5'
+import { getRoute } from '../lib/i18n'
 
 const copy = {
   en: {
@@ -38,7 +39,7 @@ const copy = {
   }
 }
 
-const ChatBubble = ({ message, sourceLabel }) => {
+const ChatBubble = ({ locale, message, onSourceClick, sourceLabel }) => {
   const isUser = message.role === 'user'
   const bubbleBg = useColorModeValue(
     isUser ? 'teal.500' : 'whiteAlpha.900',
@@ -73,8 +74,8 @@ const ChatBubble = ({ message, sourceLabel }) => {
                 <Link
                   key={source.id}
                   as={NextLink}
-                  href={source.url}
-                  scroll={false}
+                  href={getRoute(source.url, locale)}
+                  onClick={onSourceClick}
                   fontSize="xs"
                   color="teal.300"
                   textDecoration="underline"
@@ -205,7 +206,9 @@ const ChatWidget = ({ locale = 'en' }) => {
             {messages.map((message, index) => (
               <ChatBubble
                 key={`${message.role}-${index}`}
+                locale={locale}
                 message={message}
+                onSourceClick={() => setIsOpen(false)}
                 sourceLabel={t.sources}
               />
             ))}
