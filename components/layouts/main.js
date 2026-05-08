@@ -3,6 +3,7 @@ import dynamic from 'next/dynamic'
 import NavBar from '../navbar'
 import { Box, Container } from '@chakra-ui/react'
 import Footer from '../footer'
+import ChatWidget from '../chat-widget'
 import VoxelTerrariumLoader from '../voxel-terrarium-loader'
 import { getLocaleFromPath } from '../../lib/i18n'
 
@@ -46,6 +47,8 @@ const Main = ({ children, router }) => {
 
         <Footer />
       </Container>
+
+      <ChatWidget locale={locale} />
     </Box>
   )
 }
