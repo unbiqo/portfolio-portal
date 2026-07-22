@@ -1,47 +1,54 @@
-# Takuya's Homepage
+# Damir Sarsenov — Portfolio
 
-[https://www.craftz.dog/](https://www.craftz.dog/)
+Personal portfolio site, bilingual (English / Russian), with an **AI assistant that answers
+recruiters' questions grounded in my actual project history**.
 
-## Tutorial
+🔗 Live case studies inside: Seedform (Shopify influencer-gifting app), BI reporting automation,
+Luxury Car Salon, a marathon course platform, and web-scraping pipelines.
 
-Watch how I built this website on YouTube:
-
-[![YouTube thumbnail](./doc/thumb.png)](https://www.youtube.com/watch?v=bSMZgXzC9AA)
-
-## Stack
-
-- [Next.js](https://nextjs.org/) - A React framework with hybrid static & server rendering, and route pre-fetching, etc.
-- [Chakra UI](https://chakra-ui.com/) - A simple, modular and accessible component library for React
-- [Three.js](https://threejs.org/) - 3D library for JavaScript
-- [Framer Motion](https://www.framer.com/motion/) - An animation library for React
-
-## Project structure
-
-```
-$PROJECT_ROOT
-│   # Page files
-├── pages
-│   # React component files
-├── components
-│   # Non-react modules
-├── lib
-│   # Static files for images and 3d model file
-└── public
-```
-
-## License
-
-MIT License.
-
-You can create your own homepage for free without notifying me by forking this project under the following conditions:
-
-- Add a link to [my homepage](https://www.craftz.dog/)
-- Do not use the 3d voxel dog
-
-Check out [LICENSE](./LICENSE) for more detail.
+> **Stack:** Next.js · React · Chakra UI · Three.js · Framer Motion · Google Gemini (portfolio RAG chat)
 
 ---
 
-Looking for a Markdown note-taking app? Check out my app called Inkdrop:
+## Highlight: portfolio RAG chat
 
-[![Inkdrop](https://github.com/craftzdog/dotfiles-public/raw/master/images/inkdrop.png)](https://www.inkdrop.app/)
+The site ships a small **retrieval-augmented assistant** (`pages/api/chat.js` + `lib/chat-knowledge`):
+
+- The portfolio is chunked into a knowledge base (projects, skills, contact).
+- On each question, the most relevant chunks are retrieved and injected as grounded context.
+- A prompt instructs the model to **answer only from that context** — if something isn't in the
+  portfolio, it says so and suggests getting in touch, instead of hallucinating.
+- Generation runs on **Google Gemini** (`gemini-2.5-flash`), with the API key read from the
+  environment (nothing secret is committed).
+
+So a recruiter can literally ask *"what has Damir built?"* or *"should we hire him for AI workflow
+automation?"* and get an answer sourced from real projects.
+
+---
+
+## Features
+
+- **Bilingual** English / Russian routes with persisted language switching.
+- Detailed **case-study pages** (`pages/works/`): Seedform, BI automation, luxury car salon,
+  marathon course, web scraping.
+- Interactive 3D hero (Three.js) and motion (Framer Motion).
+- Contact modal, light/dark themes.
+
+---
+
+## Run locally
+
+```bash
+npm install
+cp .env.example .env.local   # set GEMINI_API_KEY for the chat assistant
+npm run dev                  # http://localhost:3000
+```
+
+---
+
+## Credits
+
+Built on Takuya Matsuyama's excellent open-source
+[**craftzdog-homepage**](https://github.com/craftzdog/craftzdog-homepage) template
+([craftz.dog](https://www.craftz.dog/)), then personalized with my own content, bilingual support,
+case studies, and the Gemini-backed portfolio chat assistant. Template used under its MIT license.
