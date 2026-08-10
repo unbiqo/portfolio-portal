@@ -82,4 +82,3 @@ export const ReportingBlueprintsPage = ({ locale = 'en' }) => {
 const Resource = () => <ReportingBlueprintsPage locale="en" />
 
 export default Resource
-export { getServerSideProps } from '../../components/chakra'

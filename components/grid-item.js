@@ -123,7 +123,7 @@ export const WorkVideoGridItem = ({
             muted
             loop
             playsInline
-            preload="auto"
+            preload="none"
             className="grid-item-thumbnail"
             w="100%"
             display="block"

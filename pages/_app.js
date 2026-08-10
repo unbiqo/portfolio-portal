@@ -36,7 +36,7 @@ function Website({ Component, pageProps, router }) {
   }, [locale])
 
   return (
-    <Chakra cookies={pageProps.cookies}>
+    <Chakra>
       <Fonts />
       <Layout router={router}>
         <AnimatePresence

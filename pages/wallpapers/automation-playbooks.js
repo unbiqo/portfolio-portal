@@ -82,4 +82,3 @@ export const AutomationPlaybooksPage = ({ locale = 'en' }) => {
 const Resource = () => <AutomationPlaybooksPage locale="en" />
 
 export default Resource
-export { getServerSideProps } from '../../components/chakra'

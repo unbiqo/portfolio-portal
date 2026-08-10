@@ -1,16 +1,9 @@
 import Head from 'next/head'
-import dynamic from 'next/dynamic'
 import NavBar from '../navbar'
 import { Box, Container } from '@chakra-ui/react'
 import Footer from '../footer'
 import ChatWidget from '../chat-widget'
-import VoxelTerrariumLoader from '../voxel-terrarium-loader'
 import { getLocaleFromPath } from '../../lib/i18n'
-
-const LazyVoxelTerrarium = dynamic(() => import('../voxel-terrarium'), {
-  ssr: false,
-  loading: () => <VoxelTerrariumLoader />
-})
 
 const Main = ({ children, router }) => {
   const locale = getLocaleFromPath(router.asPath)
@@ -42,8 +35,6 @@ const Main = ({ children, router }) => {
 
       <Container maxW="container.md" pt={14}>
         {children}
-
-        <LazyVoxelTerrarium />
 
         <Footer />
       </Container>

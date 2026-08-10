@@ -91,4 +91,3 @@ export const PostsPage = ({ locale = 'en' }) => {
 const Posts = () => <PostsPage locale="en" />
 
 export default Posts
-export { getServerSideProps } from '../components/chakra'

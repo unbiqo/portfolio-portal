@@ -89,4 +89,3 @@ export const BiAutomationPage = ({ locale = 'en' }) => {
 const Work = () => <BiAutomationPage locale="en" />
 
 export default Work
-export { getServerSideProps } from '../../components/chakra'

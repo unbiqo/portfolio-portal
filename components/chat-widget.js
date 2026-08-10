@@ -135,7 +135,7 @@ const ChatWidget = ({ locale = 'en' }) => {
           sources: data.sources || []
         }
       ])
-    } catch (error) {
+    } catch {
       setMessages(currentMessages => [
         ...currentMessages,
         { role: 'assistant', content: t.error }

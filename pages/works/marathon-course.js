@@ -110,4 +110,3 @@ export const MarathonCoursePage = ({ locale = 'en' }) => {
 const Work = () => <MarathonCoursePage locale="en" />
 
 export default Work
-export { getServerSideProps } from '../../components/chakra'

@@ -73,4 +73,3 @@ export const WallpapersPage = ({ locale = 'en' }) => {
 const Wallpapers = () => <WallpapersPage locale="en" />
 
 export default Wallpapers
-export { getServerSideProps } from '../../components/chakra'

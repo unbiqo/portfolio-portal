@@ -98,4 +98,3 @@ export const SeedformPage = ({ locale = 'en' }) => {
 const Work = () => <SeedformPage locale="en" />
 
 export default Work
-export { getServerSideProps } from '../../components/chakra'

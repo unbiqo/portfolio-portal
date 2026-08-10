@@ -119,4 +119,3 @@ export const WorksPage = ({ locale = 'en' }) => {
 const Works = () => <WorksPage locale="en" />
 
 export default Works
-export { getServerSideProps } from '../components/chakra'

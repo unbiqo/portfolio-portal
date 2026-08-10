@@ -7,7 +7,6 @@ import {
   Button,
   List,
   ListItem,
-  SimpleGrid,
   useColorModeValue
 } from '@chakra-ui/react'
 import { ChevronRightIcon, EmailIcon } from '@chakra-ui/icons'
@@ -15,12 +14,13 @@ import Paragraph from '../components/paragraph'
 import { BioSection, BioYear } from '../components/bio'
 import Layout from '../components/layouts/article'
 import Section from '../components/section'
-import { WorkGridItem, WorkVideoGridItem } from '../components/grid-item'
+import ProjectCarousel from '../components/project-carousel'
 import { IoLogoLinkedin } from 'react-icons/io5'
 import thumbAutomation from '../public/images/works/inkdrop_eyecatch.png'
 import thumbScraping from '../public/images/works/alenau_eyecatch.png'
 import thumbAnalytics from '../public/images/works/the-four-painters_eyecatch.jpg'
 import thumbLuxuryCarSalon from '../public/images/works/luxury-car-salon_01.png'
+import thumbMarathonCourse from '../public/images/works/marathon-course_01.png'
 
 const copy = {
   en: {
@@ -56,6 +56,12 @@ const copy = {
         title: 'Luxury Car Salon',
         description:
           'Premium automotive landing page with a video hero, animated inventory, and private inquiry flow.'
+      },
+      {
+        id: 'marathon-course',
+        title: 'The Art of Storytelling Marathon',
+        description:
+          'Bilingual creative program landing page with localized content, language switching, and signup capture flow.'
       }
     ],
     experienceTitle: 'Experience',
@@ -114,13 +120,18 @@ export const HomePage = ({ locale = 'en' }) => {
     seedform: thumbAutomation,
     'web-scraping': thumbScraping,
     'bi-automation': thumbAnalytics,
-    'luxury-car-salon': thumbLuxuryCarSalon
+    'luxury-car-salon': thumbLuxuryCarSalon,
+    'marathon-course': thumbMarathonCourse
   }
+  const carouselProjects = featuredWorks.map(work => ({
+    ...work,
+    thumbnail: featuredThumbnails[work.id]
+  }))
 
   return (
     <Layout>
       <Container>
-        <Box display={{ md: 'flex' }}>
+        <Box display={{ md: 'flex' }} mt={{ base: 4, md: 6 }}>
           <Box flexGrow={1}>
             <Heading as="h2" variant="page-title">
               Damir Sarsenov
@@ -164,32 +175,7 @@ export const HomePage = ({ locale = 'en' }) => {
             <Heading as="h3" variant="section-title">
               {t.projectsTitle || copy.en.projectsTitle}
             </Heading>
-            <SimpleGrid columns={[1, 1, 2]} gap={6}>
-              {featuredWorks.map(work =>
-                work.id === 'seedform' ? (
-                  <WorkVideoGridItem
-                    key={work.id}
-                    id={work.id}
-                    locale={locale}
-                    title={work.title}
-                    videoSrc="/videos/Demo_Seedform.mp4"
-                    poster={featuredThumbnails[work.id]}
-                  >
-                    {work.description}
-                  </WorkVideoGridItem>
-                ) : (
-                  <WorkGridItem
-                    key={work.id}
-                    id={work.id}
-                    locale={locale}
-                    title={work.title}
-                    thumbnail={featuredThumbnails[work.id]}
-                  >
-                    {work.description}
-                  </WorkGridItem>
-                )
-              )}
-            </SimpleGrid>
+            <ProjectCarousel locale={locale} projects={carouselProjects} />
           </Box>
           <Box align="center" mt={6}>
             <Button
@@ -303,4 +289,3 @@ export const HomePage = ({ locale = 'en' }) => {
 const Home = () => <HomePage locale="en" />
 
 export default Home
-export { getServerSideProps } from '../components/chakra'

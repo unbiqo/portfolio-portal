@@ -140,4 +140,3 @@ export const AlenauPage = ({ locale = 'en' }) => {
 const Work = () => <AlenauPage locale="en" />
 
 export default Work
-export { getServerSideProps } from '../../components/chakra'

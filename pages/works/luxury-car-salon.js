@@ -109,4 +109,3 @@ export const LuxuryCarSalonPage = ({ locale = 'en' }) => {
 const Work = () => <LuxuryCarSalonPage locale="en" />
 
 export default Work
-export { getServerSideProps } from '../../components/chakra'
